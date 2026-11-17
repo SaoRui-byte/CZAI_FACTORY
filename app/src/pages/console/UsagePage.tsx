@@ -107,6 +107,18 @@ export default function UsagePage() {
               </tr>
             </thead>
             <tbody className="text-[12px]">
+              {rows.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="px-5 py-14 text-center">
+                    <p className="text-[12.5px] text-mist-400">
+                      该时间段暂无调用
+                    </p>
+                    <p className="mt-1.5 text-[11px] text-mist-600">
+                      换个时间范围，或先在对话测试台发起一次调用。
+                    </p>
+                  </td>
+                </tr>
+              )}
               {rows.map((r) => (
                 <tr
                   key={r.model}

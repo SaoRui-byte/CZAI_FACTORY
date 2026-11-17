@@ -11,6 +11,8 @@ export interface Plan {
   priceNote: string
   features: string[]
   cta: string
+  /** 按钮跳转目标；企业合作类走 /contact，自助注册走 /register */
+  href: string
   highlighted?: boolean
 }
 
@@ -28,6 +30,7 @@ export const plans: Plan[] = [
       '社区支持',
     ],
     cta: '免费开始',
+    href: '/register',
   },
   {
     name: '企业版',
@@ -42,6 +45,7 @@ export const plans: Plan[] = [
       '专属技术对接',
     ],
     cta: '联系商务',
+    href: '/contact',
     highlighted: true,
   },
   {
@@ -57,6 +61,7 @@ export const plans: Plan[] = [
       '驻场支持',
     ],
     cta: '咨询方案',
+    href: '/contact',
   },
 ]
 

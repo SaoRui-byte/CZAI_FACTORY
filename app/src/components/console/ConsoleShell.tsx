@@ -24,7 +24,10 @@ export function ConsoleShell({ children }: { children: ReactNode }) {
   return (
     <>
       <SiteHeader />
-      <div className="container-page flex flex-col gap-8 pt-8 pb-20 lg:flex-row lg:gap-10">
+      <main
+        id="main"
+        className="container-page flex flex-col gap-8 pt-8 pb-20 lg:flex-row lg:gap-10"
+      >
         {/* 侧栏 / 移动端横向条 */}
         <aside className="lg:w-[210px] lg:shrink-0">
           <nav
@@ -71,7 +74,7 @@ export function ConsoleShell({ children }: { children: ReactNode }) {
         </aside>
 
         <div className="min-w-0 flex-1">{children}</div>
-      </div>
+      </main>
     </>
   )
 }

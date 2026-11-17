@@ -44,7 +44,7 @@ export function AuthShell({
         </Link>
       </header>
 
-      <main className="flex flex-1 items-center justify-center px-5 py-10">
+      <main id="main" className="flex flex-1 items-center justify-center px-5 py-10">
         <div className="w-full max-w-[400px]">
           <div className="glass-strong edge-light rounded-card px-7 py-8 md:px-8">
             <h1 className="text-[22px] leading-tight font-bold tracking-[-0.01em] text-mist-100">

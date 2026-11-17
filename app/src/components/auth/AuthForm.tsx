@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../../lib/useAuth'
 import { CODE_TTL_SECONDS, DEMO_ACCOUNT, DEMO_CODE, isValidPhone } from '../../lib/auth'
+import { safeNext } from '../../lib/safeNext'
 import { cn } from '../../lib/cn'
 
 type Mode = 'login' | 'register'
@@ -10,7 +11,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const { signIn } = useAuth()
   const navigate = useNavigate()
   const [params] = useSearchParams()
-  const next = params.get('next') || '/console'
+  const next = safeNext(params.get('next'))
 
   const [phone, setPhone] = useState('')
   const [code, setCode] = useState('')

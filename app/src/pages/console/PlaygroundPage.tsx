@@ -14,6 +14,41 @@ interface Message {
 
 const online = models.filter((m) => m.status === 'online')
 
+/** 极简 Markdown：只处理 ``` 代码块与 **加粗**，够演示用，不引入解析库。 */
+function MessageBody({ text }: { text: string }) {
+  const parts = text.split(/```(?:[\w-]+)?\n?/g)
+  return (
+    <>
+      {parts.map((part, i) => {
+        // 奇数段是代码块
+        if (i % 2 === 1) {
+          return (
+            <pre
+              key={i}
+              className="my-2.5 overflow-x-auto rounded-lg border border-white/[0.08] bg-ink-950/80 p-3 font-mono text-[11px] leading-[1.7] text-mist-300"
+            >
+              <code>{part.replace(/\n$/, '')}</code>
+            </pre>
+          )
+        }
+        return (
+          <span key={i} className="whitespace-pre-wrap">
+            {part.split(/(\*\*[^*]+\*\*)/g).map((seg, j) =>
+              seg.startsWith('**') && seg.endsWith('**') ? (
+                <strong key={j} className="font-medium text-mist-100">
+                  {seg.slice(2, -2)}
+                </strong>
+              ) : (
+                <span key={j}>{seg}</span>
+              ),
+            )}
+          </span>
+        )
+      })}
+    </>
+  )
+}
+
 export default function PlaygroundPage() {
   const [params] = useSearchParams()
   const requested = params.get('model')
@@ -61,9 +96,14 @@ export default function PlaygroundPage() {
     setInput('')
     setBusy(true)
 
-    // 模拟流式输出：逐段追加
+    // 模拟流式输出：逐段追加。按码点切分（Array.from），
+    // 避免把 emoji / 生僻字这类代理对从中间劈开产生乱码。
     const full = demoReplies(text)
-    const chunks = full.match(/[\s\S]{1,3}/g) ?? [full]
+    const cps = Array.from(full)
+    const chunks: string[] = []
+    for (let c = 0; c < cps.length; c += 3) {
+      chunks.push(cps.slice(c, c + 3).join(''))
+    }
     let i = 0
 
     const tick = () => {
@@ -239,13 +279,13 @@ export default function PlaygroundPage() {
                     </span>
                     <div
                       className={cn(
-                        'max-w-[85%] rounded-xl px-4 py-3 text-[12.5px] leading-[1.85] whitespace-pre-wrap',
+                        'max-w-[85%] rounded-xl px-4 py-3 text-[12.5px] leading-[1.85]',
                         m.role === 'user'
-                          ? 'bg-white/[0.06] text-mist-100'
+                          ? 'bg-white/[0.06] whitespace-pre-wrap text-mist-100'
                           : 'border border-white/[0.07] bg-white/[0.025] text-mist-300',
                       )}
                     >
-                      {m.content}
+                      <MessageBody text={m.content} />
                       {m.streaming && (
                         <span
                           aria-hidden="true"

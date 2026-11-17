@@ -20,7 +20,7 @@ client = OpenAI(
 )
 
 resp = client.chat.completions.create(
-    model="deepseek-v3.2",
+    model="deepseek-v3-2",
     messages=[{"role": "user", "content": "你好"}],
     stream=True,
 )
@@ -35,13 +35,13 @@ for chunk in resp:
 
 const explainAnswer = `这个问题可以从三个层面理解。
 
-**一、接口层面**
+一、接口层面
 平台对外暴露标准的 OpenAI 兼容端点，更换模型只需改 model 参数，业务代码无需改动。这对已经有 OpenAI 接入经验的团队最省事。
 
-**二、算力层面**
+二、算力层面
 推理集群按需伸缩，峰值自动扩容。你不需要提前承诺用量，也不用自建机房。
 
-**三、计费层面**
+三、计费层面
 每次调用的输入与输出 token 分开计量，账单可以追溯到单条请求。企业用户可申请月结。
 
 以上均为演示文本，用于展示排版与流式交互效果。`

@@ -190,6 +190,7 @@ npm run audit          # 17 个路由 + 登录流程 + 溢出检查
 
 ## 相关文档
 
+- [后端对接文档.md](后端对接文档.md) — **后端接口对接文档**（全部接口契约与字段映射）
 - [app/README.md](app/README.md) — 前端工程细节
 - [docs/superpowers/specs/2026-11-17-czai-token-foundry-design.md](docs/superpowers/specs/2026-11-17-czai-token-foundry-design.md) — 首页与模型广场设计规格
 - [docs/superpowers/specs/2026-11-17-czai-pages-expansion-design.md](docs/superpowers/specs/2026-11-17-czai-pages-expansion-design.md) — 页面补齐规格

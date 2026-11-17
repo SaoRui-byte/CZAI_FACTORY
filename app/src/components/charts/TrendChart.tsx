@@ -47,6 +47,13 @@ export function TrendChart({
   const innerH = H - pad.top - pad.bottom
 
   const { maxY, ticks, path, areaPath, points } = useMemo(() => {
+    // 空数据必须在这里兜底：Math.max(...[]) 是 -Infinity，后面的
+    // pts[pts.length - 1] 会取到 undefined，接入真实后端后
+    // 「该时间段没有调用」会直接把页面打崩。
+    if (data.length === 0) {
+      return { maxY: 0, ticks: [] as number[], path: '', areaPath: '', points: [] as (Point & { x: number; y: number })[] }
+    }
+
     const values = data.map((d) => d.value)
     const rawMax = Math.max(...values)
     const maxY = Math.ceil(rawMax / 20) * 20
@@ -88,6 +95,17 @@ export function TrendChart({
 
   const active = hover !== null ? points[hover] : null
   const last = points[points.length - 1]
+
+  if (data.length === 0) {
+    return (
+      <div
+        ref={wrapRef}
+        className="grid h-[260px] place-items-center rounded-lg border border-dashed border-white/[0.08]"
+      >
+        <p className="text-[11.5px] text-mist-600">该时间段暂无调用数据</p>
+      </div>
+    )
+  }
 
   return (
     <div ref={wrapRef} className="relative w-full">

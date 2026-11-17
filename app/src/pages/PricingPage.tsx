@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { PageShell } from '../components/layout/PageShell'
 import { PageHero } from '../components/ui/PageHero'
-import { ButtonLink } from '../components/ui/Button'
+import { ButtonRouterLink } from '../components/ui/Button'
 import { billing, faqs, plans } from '../data/pricing'
 import { models } from '../data/models'
 import { cn } from '../lib/cn'
@@ -60,14 +60,14 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
-              <ButtonLink
-                href="/register"
+              <ButtonRouterLink
+                to={plan.href}
                 variant={plan.highlighted ? 'solid' : 'ghost'}
                 size="sm"
                 className="mt-7 w-full"
               >
                 {plan.cta}
-              </ButtonLink>
+              </ButtonRouterLink>
             </div>
           ))}
         </div>

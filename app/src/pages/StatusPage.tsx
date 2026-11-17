@@ -11,6 +11,13 @@ const incidentDays = components.reduce(
   0,
 )
 
+/** 事件状态徽标配色：已解决为绿，观察中/排查中为琥珀，不能一律标绿。 */
+const eventTone: Record<(typeof events)[number]['status'], string> = {
+  resolved: 'bg-[#0CA30C]/12 text-[#5FD35F]',
+  monitoring: 'bg-[#C98500]/12 text-[#F0C674]',
+  investigating: 'bg-[#E66767]/12 text-[#F0A0A0]',
+}
+
 export default function StatusPage() {
   return (
     <PageShell>
@@ -105,9 +112,15 @@ export default function StatusPage() {
                 <span className="text-[13px] font-medium text-mist-200">
                   {e.title}
                 </span>
-                <span className="ml-auto rounded-full bg-[#0CA30C]/12 px-2.5 py-1 text-[10px] text-[#5FD35F]">
+                <span
+                  className={cn(
+                    'ml-auto rounded-full px-2.5 py-1 text-[10px]',
+                    eventTone[e.status],
+                  )}
+                >
                   {statusLabel[e.status]}
-                </span>              </div>
+                </span>
+              </div>
               <p className="mt-2.5 text-[12px] leading-[1.85] text-mist-500">
                 {e.detail}
               </p>

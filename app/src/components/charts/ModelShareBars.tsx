@@ -16,6 +16,15 @@ export function ModelShareBars({ rows }: { rows: Row[] }) {
   const total = sorted.reduce((s, r) => s + r.calls, 0)
   const max = sorted[0]?.calls ?? 1
 
+  // 空数据 / 全零时 total 为 0，直接算占比会得到 NaN%。
+  if (sorted.length === 0 || total === 0) {
+    return (
+      <div className="grid h-[180px] place-items-center rounded-lg border border-dashed border-white/[0.08]">
+        <p className="text-[11.5px] text-mist-600">该时间段暂无调用数据</p>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col gap-4">
       {sorted.map((row) => {

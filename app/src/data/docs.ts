@@ -54,7 +54,7 @@ client = OpenAI(
 )
 
 resp = client.chat.completions.create(
-    model="deepseek-v3.2",
+    model="deepseek-v3-2",
     messages=[
         {"role": "user", "content": "用一句话解释什么是 token"}
     ],
@@ -72,7 +72,7 @@ print(resp.choices[0].message.content)`,
             type: 'code',
             lang: 'python',
             text: `resp = client.chat.completions.create(
-    model="deepseek-v3.2",
+    model="deepseek-v3-2",
     messages=[{"role": "user", "content": "写一段介绍"}],
     stream=True,
 )
@@ -99,7 +99,7 @@ for chunk in resp:
             type: 'code',
             lang: 'json',
             text: `{
-  "model": "deepseek-v3.2",
+  "model": "deepseek-v3-2",
   "messages": [
     { "role": "system", "content": "你是有用的助手" },
     { "role": "user", "content": "你好" }
@@ -137,7 +137,7 @@ for chunk in resp:
   "id": "chatcmpl-8f2a1c",
   "object": "chat.completion",
   "created": 1732000000,
-  "model": "deepseek-v3.2",
+  "model": "deepseek-v3-2",
   "choices": [{
     "index": 0,
     "message": { "role": "assistant", "content": "你好！" },
@@ -187,7 +187,7 @@ const client = new OpenAI({
 })
 
 const resp = await client.chat.completions.create({
-  model: 'deepseek-v3.2',
+  model: 'deepseek-v3-2',
   messages: [{ role: 'user', content: '你好' }],
 })
 
@@ -205,7 +205,7 @@ console.log(resp.choices[0].message.content)`,
   -H "Authorization: Bearer $CZAI_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "model": "deepseek-v3.2",
+    "model": "deepseek-v3-2",
     "messages": [{"role": "user", "content": "你好"}]
   }'`,
           },
