@@ -1,0 +1,60 @@
+# ---------- 依赖 ----------
+node_modules/
+.pnpm-store/
+.yarn/
+
+# ---------- 构建产物 ----------
+dist/
+dist-ssr/
+build/
+*.tsbuildinfo
+.vite/
+
+# ---------- 环境变量 ----------
+.env
+.env.*
+!.env.example
+*.local
+
+# ---------- 日志 ----------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---------- 测试与覆盖率 ----------
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# ---------- 编辑器与系统 ----------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 工具缓存 ----------
+# 仅忽略机器本地配置；.claude/settings.json 之类的团队共享配置需提交
+.claude/settings.local.json
+# .codegraph/ 目录自带 .gitignore（忽略内容、只保留自身），无需在此重复
+.eslintcache
+.oxlintcache
+
+# ---------- 视觉走查截图 ----------
+# 由 app/scripts/shoot.cjs 与 audit.cjs 生成，属于本地验证产物
+# 注意：preview/design-directions.html 是设计方向对比页，会被正常提交
+preview/*.png
+preview/*.jpg
+preview/*.webp
